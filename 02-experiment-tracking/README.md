@@ -1,6 +1,9 @@
 # 2. Experiment tracking and model management
 
 
+* [Slides](https://drive.google.com/file/d/1YtkAtOQS3wvY7yts_nosVlXrLQBq5q37/view?usp=sharing)
+
+
 ## 2.1 Experiment tracking intro
 
 <a href="https://www.youtube.com/watch?v=MiA7LQin9c8&list=PL3MmuxUbc_hIUISrluw_A7wDSmfOhErJK">
@@ -45,11 +48,18 @@ difference between using Jupyter with VS code and without
 </a>
 
 
-
 ## 2.6 MLflow in practice
 
-COMING SOON
+<a href="https://www.youtube.com/watch?v=1ykg4YmbFVA&list=PL3MmuxUbc_hIUISrluw_A7wDSmfOhErJK">
+  <img src="images/thumbnail-2-06.jpg">
+</a>
 
+
+## 2.7 MLflow: benefits, limitations and alternatives
+
+<a href="https://www.youtube.com/watch?v=Lugy1JPsBRY&list=PL3MmuxUbc_hIUISrluw_A7wDSmfOhErJK">
+  <img src="images/thumbnail-2-07.jpg">
+</a>
 
 
 ## 2.7 Homework
