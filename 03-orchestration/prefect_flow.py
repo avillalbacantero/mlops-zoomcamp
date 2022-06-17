@@ -36,6 +36,8 @@ def read_dataframe(filename):
 def add_features(df_train, df_val):
     # df_train = read_dataframe(train_path)
     # df_val = read_dataframe(val_path)
+    
+    # raise ValueError( )
 
     print(len(df_train))
     print(len(df_val))
@@ -126,15 +128,15 @@ def train_best_model(train, valid, y_val, dv):
         rmse = mean_squared_error(y_val, y_pred, squared=False)
         mlflow.log_metric("rmse", rmse)
 
-        with open("models/preprocessor.b", "wb") as f_out:
+        with open("../models/preprocessor.b", "wb") as f_out:
             pickle.dump(dv, f_out)
-        mlflow.log_artifact("models/preprocessor.b", artifact_path="preprocessor")
+        mlflow.log_artifact("../models/preprocessor.b", artifact_path="preprocessor")
 
         mlflow.xgboost.log_model(booster, artifact_path="models_mlflow")
 
-@flow(task_runner=SequentialTaskRunner())
-def main(train_path: str="./data/green_tripdata_2021-01.parquet",
-        val_path: str="./data/green_tripdata_2021-02.parquet"):
+@flow(task_runner=SequentialTaskRunner())  # by default, tasks are executed concurrently
+def main(train_path: str="../data/green/green_tripdata_2021-01.parquet",
+        val_path: str="../data/green/green_tripdata_2021-02.parquet"):
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("nyc-taxi-experiment")
     X_train = read_dataframe(train_path)
@@ -144,3 +146,5 @@ def main(train_path: str="./data/green_tripdata_2021-01.parquet",
     valid = xgb.DMatrix(X_val, label=y_val)
     train_model_search(train, valid, y_val)
     train_best_model(train, valid, y_val, dv)
+
+main()

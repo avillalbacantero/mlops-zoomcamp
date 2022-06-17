@@ -126,15 +126,15 @@ def train_best_model(train, valid, y_val, dv):
         rmse = mean_squared_error(y_val, y_pred, squared=False)
         mlflow.log_metric("rmse", rmse)
 
-        with open("models/preprocessor.b", "wb") as f_out:
+        with open("../models/preprocessor.b", "wb") as f_out:
             pickle.dump(dv, f_out)
-        mlflow.log_artifact("models/preprocessor.b", artifact_path="preprocessor")
+        mlflow.log_artifact("../models/preprocessor.b", artifact_path="preprocessor")
 
         mlflow.xgboost.log_model(booster, artifact_path="models_mlflow")
 
 @flow(task_runner=SequentialTaskRunner())
-def main(train_path: str="./data/green_tripdata_2021-01.parquet",
-        val_path: str="./data/green_tripdata_2021-02.parquet"):
+def main(train_path: str="../data/green/green_tripdata_2021-01.parquet",
+        val_path: str="../data/green/green_tripdata_2021-02.parquet"):
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("nyc-taxi-experiment")
     X_train = read_dataframe(train_path)
@@ -147,13 +147,14 @@ def main(train_path: str="./data/green_tripdata_2021-01.parquet",
 
 from prefect.deployments import DeploymentSpec
 from prefect.orion.schemas.schedules import IntervalSchedule
-from prefect.flow_runners import SubprocessFlowRunner
+from prefect.flow_runners import SubprocessFlowRunner  # can be Docker or K8s, this case is locally
 from datetime import timedelta
 
+# Deployment specification
 DeploymentSpec(
     flow=main,
     name="model_training",
-    schedule=IntervalSchedule(interval=timedelta(minutes=5)),
+    schedule=IntervalSchedule(interval=timedelta(minutes=5)),  # execute each 5 mins
     flow_runner=SubprocessFlowRunner(),
     tags=["ml"]
 )
