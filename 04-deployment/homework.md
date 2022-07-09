@@ -75,6 +75,7 @@ dependencies we use for the virtual env.
 
 What's the first hash for the Scikit-Learn dependency?
 
+Sol: sha256:08ef968f6b72033c16c479c966bf37ccd49b06ea91b765e1cc27afefe723920b
 
 ## Q5. Parametrize the script
 
@@ -89,6 +90,8 @@ What's the mean predicted duration?
 * 16.29
 * 21.29
 * 26.29
+
+Sol: 16.29
 
 Hint: just add a print statement to your script.
 
@@ -135,6 +138,7 @@ for April 2021?
 * 25.96
 * 36.55
 
+Sol. 9.96
 
 ## Bonus: upload the result to the cloud (Not graded)
 
