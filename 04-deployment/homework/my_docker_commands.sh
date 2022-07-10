@@ -1,3 +1,3 @@
 docker build -f my_homework.Dockerfile -t batch_deployment:1.0 .
 
-docker run -it -v /home/avillalbacantero/Documents/Career/Self-Training/MLOps_Zoomcamp/mlops-zoomcamp/data:/app/data -v /home/avillalbacantero/Documents/Career/Self-Training/MLOps_Zoomcamp/mlops-zoomcamp/04-deployment/homework/output:/app/output batch_deployment:1.0
+docker run -it -v /home/avillalbacantero/Documents/Career/Self-Training/MLOps_Zoomcamp/mlops-zoomcamp/data:/app/data -v /home/avillalbacantero/Documents/Career/Self-Training/MLOps_Zoomcamp/mlops-zoomcamp/04-deployment/homework/output:/app/output -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} batch_deployment:1.0 --year 2021 --month 4

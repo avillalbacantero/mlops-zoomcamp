@@ -18,4 +18,5 @@ COPY ["Pipfile", "Pipfile"]
 COPY ["Pipfile.lock", "Pipfile.lock"]
 RUN pipenv install --system --deploy
 
-ENTRYPOINT [ "python", "starter.py", "--year", "2021", "--month", "4" ]
+#ENTRYPOINT [ "python", "starter.py", "--year", "2021", "--month", "4" ]
+ENTRYPOINT [ "python", "starter.py" ]

@@ -52,7 +52,8 @@ if __name__ == "__main__":
     # Set input and output file
     input_file = f"data/fhv_tripdata_{year:04d}-{month:02d}.parquet"
     #input_file = f"../../data/fhv_tripdata_{year:04d}-{month:02d}.parquet"
-    output_file = f'output/fhv_tripdata_{year:04d}-{month:02d}.parquet'
+    #output_file = f'output/fhv_tripdata_{year:04d}-{month:02d}.parquet'
+    output_file = f"s3://homework-batch/predictions/fhv_tripdata_{year:04d}-{month:02d}.parquet"
     
     # Read and process the data. We create an aritifial unique ID for
     # each sample
