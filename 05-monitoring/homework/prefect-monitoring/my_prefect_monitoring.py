@@ -20,8 +20,10 @@ MONGO_DATABASE = "prediction_service"
 PREDICTION_COLLECTION = "data"
 REPORT_COLLECTION = "report"
 REFERENCE_DATA_FILE = "../datasets/green_tripdata_2021-03.parquet" # Modify this for Q7
+#REFERENCE_DATA_FILE = "green_tripdata_2021-03to04.parquet"
 TARGET_DATA_FILE = "target.csv"
 MODEL_FILE = os.getenv('MODEL_FILE', '../prediction_service/lin_reg.bin') # Modify this for Q7
+#MODEL_FILE = os.getenv('MODEL_FILE', '../prediction_service/lin_reg_V2.bin')
 
 @task
 def upload_target(filename):
@@ -33,8 +35,6 @@ def upload_target(filename):
             collection.update_one({"id": row[0]},
                                   {"$set": {"target": float(row[1])}}
                                  )
-
-
 
 @task
 def load_reference_data(filename):
@@ -81,12 +81,12 @@ def run_evidently(ref_data, data):
 
 @task
 def save_report(result):
-    pass
+    client = MongoClient("mongodb://localhost:27017/")
+    client.get_database(MONGO_DATABASE).get_collection(REPORT_COLLECTION).insert_one(result)
 
 @task
 def save_html_report(result):
-    pass
-
+    result.save("evidently_report_homework.html")
 
 @flow
 def batch_analyze():

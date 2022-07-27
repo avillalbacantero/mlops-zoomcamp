@@ -11,34 +11,37 @@ from pymongo import MongoClient
 
 MODEL_FILE = os.getenv('MODEL_FILE', 'lin_reg.bin')
 
+# Monitoring constants
 EVIDENTLY_SERVICE_ADDRESS = os.getenv('EVIDENTLY_SERVICE', 'http://127.0.0.1:5000')
 MONGODB_ADDRESS = os.getenv("MONGODB_ADDRESS", "mongodb://127.0.0.1:27017")
 
 with open(MODEL_FILE, 'rb') as f_in:
     dv, model = pickle.load(f_in)
 
-
 app = Flask('duration')
+
 mongo_client = MongoClient(MONGODB_ADDRESS)
 db = mongo_client.get_database("prediction_service")
-collection = db.get_collection("data")
+collection = db.get_collection("data")  # like table in SQL
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
     record = request.get_json()
 
+    # Feature engineering and preprocessing
     record['PU_DO'] = '%s_%s' % (record['PULocationID'], record['DOLocationID'])
-
     X = dv.transform([record])
+    
+    # Make the prediction
     y_pred = model.predict(X)
 
+    save_to_db(record, float(y_pred))  # to MongoDB
+    send_to_evidently_service(record, float(y_pred))  # to Monitoring Service
+    
     result = {
         'duration': float(y_pred),
     }
-
-    save_to_db(record, float(y_pred))
-    send_to_evidently_service(record, float(y_pred))
     return jsonify(result)
 
 
