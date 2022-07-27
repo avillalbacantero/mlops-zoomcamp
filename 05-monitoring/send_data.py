@@ -6,7 +6,7 @@ from time import sleep
 import pyarrow.parquet as pq
 import requests
 
-table = pq.read_table("green_tripdata_2022-01.parquet")
+table = pq.read_table("05-monitoring/green_tripdata_2022-01.parquet")
 data = table.to_pylist()
 
 
