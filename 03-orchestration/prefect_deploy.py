@@ -145,13 +145,13 @@ def main(train_path: str="../data/green/green_tripdata_2021-01.parquet",
     train_model_search(train, valid, y_val)
     train_best_model(train, valid, y_val, dv)
 
-from prefect.deployments import DeploymentSpec
+from prefect.deployments import Deployment
 from prefect.orion.schemas.schedules import IntervalSchedule
 from prefect.flow_runners import SubprocessFlowRunner  # can be Docker or K8s, this case is locally
 from datetime import timedelta
 
 # Deployment specification
-DeploymentSpec(
+Deployment(
     flow=main,
     name="model_training",
     schedule=IntervalSchedule(interval=timedelta(minutes=5)),  # execute each 5 mins
