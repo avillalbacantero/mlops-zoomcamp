@@ -155,8 +155,8 @@ Whats the length of the metrics for collection name "report" stored as a collect
 
 Use this jupyter notebook: [homework/prefect-monitoring/monitor_profile.ipynb](https://github.com/DataTalksClub/mlops-zoomcamp/blob/main/05-monitoring/homework/prefect-monitoring/monitor_profile.ipynb)
 
-* 2 -> This one.
-* 9 
+* 2 -> This one. ERROR!
+* 9 -> THIS.
 * 5
 * NA (empty)
 
