@@ -19,7 +19,7 @@ refactor it. We'll start by getting rid of all the global variables.
 
 Now we need to create the "main" block from which we'll invoke
 the main function. How does the `if` statement that we use for
-this looks like? 
+this looks like? Answer: `if __name__ == "__main__":`
 
 
 Hint: after refactoring, check that the code still works. Just run
@@ -43,7 +43,7 @@ pipenv install --dev pytest
 Next, create a folder `tests` and create two files. One will be
 the file with tests. We can name it `test_batch.py`. 
 
-What should be the other file? 
+What should be the other file? `__init__.py`
 
 Hint: to be able to test `batch.py`, we need to be able to
 import it. Without this other file, we won't be able to do it.
@@ -98,7 +98,7 @@ list of dictionaries.
 How many rows should be there in the expected dataframe?
 
 - 1
-- 2
+- 2 -> This one.
 - 3
 - 4
 
@@ -121,7 +121,7 @@ With AWS CLI, this is how we create a bucket:
 aws s3 mb s3://nyc-duration
 ```
 
-Adjust it for localstack. How does the command look like?
+Adjust it for localstack. How does the command look like? `aws --endpoint-url=http://localhost:4566 s3 mb s3://nyc-duration`
 
 Check that the bucket was successfully created. With AWS, this is how we typically do it:
 
@@ -218,7 +218,7 @@ df_input.to_parquet(
 
 What's the size of the file?
 
-- 3512
+- 3512 -> This one.
 - 33512
 - 63512
 - 93512
@@ -253,7 +253,7 @@ What's the sum of predicted durations for the test dataframe?
 
 - 23.05
 - 46.23
-- 69.28
+- 69.28 -> This one.
 - 81.78
 
 
